@@ -3,13 +3,12 @@ import { CircleUser } from 'lucide-react';
 import { useContext } from 'react';
 import axios from 'axios';
 import { motion } from "framer-motion";
-import { AuthContext } from '../Components/AuthContext';
+import { AuthContext } from '../AuthContext';
 import { NavLink } from "react-router-dom";
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
-import UserZahialga from "../Components/user/userZahialga";
-import UserZeel from "../Components/user/userZeel";
-function getUserInfo () {
+import UserZahialga from "./userZahialga";
+function UserZahial () {
 const [userData, setuserData] = useState([]);
  const [zahtoo, setzahtoo] = useState(null);
  const [zeeltoo, setZeeltoo] = useState(null);
@@ -54,16 +53,14 @@ const [userData, setuserData] = useState([]);
     <div>
       <motion.div className="min-h-full w-full border-t-2 border-gray-300  md:w-full sm:w-full bg-white items-center sm:gap-30 md:gap-35 lg:gap- gap-3 text-gray-900 p-1 flex justify-end">
         <nav>
-              <div className="max-w-6xl gap-4 mx-auto flex justify-between items-center transition-all duration-100">
+              <div className="max-w-6xl gap-4 mx-auto flex justify-between  items-center transition-all duration-100">
                 <div className="flex gap-2 sm:gap-8 md:gap-15 lg:gap-25 text-sm sm:text-xl">
-                <NavLink to='/userZahialga' className="text-gray-900  hover:text-blue-300 rounded-2xl pl-1 pr-1  transition-all duration-100"
+                <NavLink to='/userZahialga' className="text-blue-500 hover:text-blue-300 rounded-2xl pl-1 pr-1  transition-all duration-100"
                 >Захиалсан ном<Badge badgeContent={zahtoo} color="primary" className="h-2 sm:h-fit">
               <MailIcon color="action" />
         </Badge></NavLink>
-                  <NavLink to='/userZeel' className="text-gray-900 hover:text-blue-300  rounded-2xl pl-1 pr-1  transition-all duration-100">
-                  Авсан ном<Badge badgeContent={zeeltoo} color="primary" className="h-2 sm:h-fit">
-      <MailIcon color="action" />
-    </Badge></NavLink>
+                  <NavLink to='/userZeel' className="text-gray-900  hover:text-blue-300 rounded-2xl pl-1 pr-1  transition-all duration-100">
+                  Авсан ном</NavLink>
                 </div>
               </div>
             </nav>
@@ -81,7 +78,11 @@ const [userData, setuserData] = useState([]);
         </div>
       </div>
       </motion.div>
+      <motion.div className="bg-white mt-2 text-center font-bold">
+        <p>Захиалсан ном:</p>
+      <UserZahialga user={user} />
+      </motion.div>
       </div>
   )
 };
-export default getUserInfo;
+export default UserZahial;

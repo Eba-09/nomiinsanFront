@@ -36,7 +36,7 @@ const UserZahialga = ({ user }) => {
   ];
 
   return (
-    <div style={{ height: 265, width: '100%' }}>
+    <div style={{ height: 550, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

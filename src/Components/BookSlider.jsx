@@ -5,10 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import axios from "axios";
+import { useState, useEffect } from "react";
 function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
   const { user,sanch} = useContext(AuthContext);
+    const [boid, setBoid] = useState('');
+    const [bookzeels, setBookZeels] = useState(Number);
   const scroll = (direction) => {
     const { current } = scrollRef;
     if (current) {
@@ -16,9 +19,23 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
       current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
-  const Zahialah = (nomCode) => {
-    if (user) {
+  useEffect(()=>{
+    if(boid){
       axios
+          .get(`https://library-kjji.onrender.com/api/lib/book/zeel/${boid}`)
+          .then((res)=>{
+            setBookZeels(res.data.count);
+          })
+          .catch((e)=>{
+            console.log(e);
+          })
+    }
+  },[boid])
+  const Zahialah = (nomCode, booktoo) => {
+    setBoid(nomCode)
+    if (user) {
+      if(bookzeels < booktoo){
+        axios
            .post('https://library-kjji.onrender.com/api/lib/zahialga', {
                 nomCode: nomCode,
                 userCode: user
@@ -31,6 +48,8 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
             .catch((e) => {
                 alert("zahialga amjiltgui bolloo")
             })
+      }
+      
     } else {
       navigate("/userLogin");
     }
@@ -88,7 +107,7 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
                 </p>
                 { sanch ? null
                    : (<button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm
-                     text-center pl-1.5 pr-1.5 w-40" onClick={() => Zahialah(book._id)}>Захиалах</button>)
+                     text-center pl-1.5 pr-1.5 w-40" onClick={() => Zahialah(book._id, book.too)}>Захиалах</button>)
                    }
               </div>
             </motion.div>

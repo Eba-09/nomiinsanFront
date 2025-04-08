@@ -7,8 +7,6 @@ const Zahialga = () => {
   const [rows, setRows] = useState([]);
   const { sanch } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
-  
-  // Modal-н холбоотой state-ууд
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [status, setStatus] = useState('');
@@ -16,7 +14,16 @@ const Zahialga = () => {
   const [userCode, setUserCode] = useState('');
   const [isZeelModalOpen, setIsZeelModalOpen] = useState(false);
   const [butsaahDate, setButsaahDate] = useState('');
-  const [sanchCode, setSanchCode]= useState('')
+  const [sanchCode, setSanchCode]= useState('');
+  const [zeelSelectId, setZeelSelectId] = useState('');
+  const [bookCount, setBookCount] = useState(0);
+   const [bookzeels, setBookZeels] = useState(0);
+   const today = new Date();
+const minDate = today.toISOString().split('T')[0];
+const maxDays = bookCount > 5 ? 14 : 7;
+const maxDateObj = new Date();
+maxDateObj.setDate(today.getDate() + maxDays);
+const maxDate = maxDateObj.toISOString().split('T')[0];
   useEffect(() => {
     if (sanch) {
       axios
@@ -29,6 +36,7 @@ const Zahialga = () => {
             nomId: zahialga.nomCode._id,
             name: zahialga.nomCode.name,
             hel: zahialga.nomCode.hel,
+            too: zahialga.nomCode.too - bookzeels,
             rating: `${zahialga.nomCode.rating} / 10`,
             tuluw: zahialga.tuluw ? 'Баталгаажсан' : 'Хүлээгдэж байна',
             zahialgaDate: new Date(zahialga.zahialgaDate).toLocaleDateString(),
@@ -42,6 +50,25 @@ const Zahialga = () => {
         });
     }
   }, [sanch]);
+  useEffect(()=>{
+    if(zeelSelectId){
+      axios
+          .get(`https://library-kjji.onrender.com/api/lib/book/zeel/${zeelSelectId}`)
+          .then((res)=>{
+            setBookZeels(res.data.count);
+          })
+          .catch((e)=>{
+            console.log(e);
+          })
+    }
+  },[zeelSelectId])
+useEffect(() => {
+  axios.get(`https://library-kjji.onrender.com/api/lib/book/${nomCode}`)
+    .then((res) => {
+      setBookCount(res.data.data.too);
+    })
+    .catch((err) => console.error("Номын тоо авахад алдаа гарлаа:", err));
+}, [nomCode]);
 
   // Modal-ийг нээх
   const handleEditClick = (id) => {
@@ -49,13 +76,13 @@ const Zahialga = () => {
     setIsModalOpen(true);
   };
   const handleZeelClick = (id,userid,nomid) => {
-    setSelectedId(id);
+    setZeelSelectId(id);
     setUserCode(userid);
     setNomCode(nomid);
     setSanchCode(sanch);
     setIsZeelModalOpen(true);
   };
-  // Modal-ийг хаах
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -69,6 +96,18 @@ const Zahialga = () => {
   };
   
   const handleZeelSave = () => {
+    if (!butsaahDate) {
+      alert("Буцаах өдрөө сонгоно уу.");
+      return;
+    }
+    const selectedDate = new Date(butsaahDate);
+    const maxAllowedDate = new Date();
+    maxAllowedDate.setDate(today.getDate() + maxDays);
+  
+    if (selectedDate > maxAllowedDate) {
+      alert(`Та дээд талдаа ${maxDays} хоногийн дотор буцаах өдөр сонгох ёстой.`);
+      return;
+    }
     const payload = {
       nomCode,
       userCode,
@@ -103,6 +142,7 @@ const Zahialga = () => {
     { field: 'hel', headerName: 'Хэл', width: 120 },
     { field: 'rating', headerName: 'Үнэлгээ', width: 120 },
     { field: 'zahialgaDate', headerName: 'Захиалсан огноо', width: 180 },
+    { field: 'too', headerName: 'Номын үлдэгдэл', width: 120 },
     { field: 'tuluw', headerName: 'Төлөв', width: 180 },
     {
       field: 'edit',
@@ -190,6 +230,8 @@ const Zahialga = () => {
         type="date"
         className="w-full border border-gray-300 p-2 rounded mb-4"
         value={butsaahDate}
+        min={minDate}
+        max={maxDate}
         onChange={(e) => setButsaahDate(e.target.value)}
       />
       <div className="flex justify-end gap-3">

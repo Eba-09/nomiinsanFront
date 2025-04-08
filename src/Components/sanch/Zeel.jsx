@@ -17,7 +17,7 @@ const Zeel = () => {
         .get(`https://library-kjji.onrender.com/api/lib/zeel`)
         .then((res) => {
           setcount(res.data.count)
-          console.log('ZEEL DATA:', res.data);
+          
           const zahialguud = res.data.data.map((zeel, index) => ({
             id: zeel._id,
             userName: zeel.userCode.Lname,
@@ -102,7 +102,7 @@ const Zeel = () => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-transparent  bg-opacity-75 flex justify-center items-center z-50">
           <div className="bg-white p-8 rounded-lg w-80">
-            <h2 className="text-xl font-bold mb-4">Захиалгын төлөв</h2>
+            <h2 className="text-xl font-bold mb-4">Буцааж өгсөн төлөв</h2>
             <select
               className="w-full p-2 mb-4 border rounded-md"
               value={status}

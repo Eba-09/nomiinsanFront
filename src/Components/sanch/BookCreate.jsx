@@ -94,7 +94,7 @@ const handleSubmit = (e) => {
   formData.append("available", available);
   formData.append("bairshil", bairshil);
   formData.append("category", category);
-  formData.append("createUser", sanch); // шууд хэрэглэгч
+  formData.append("createUser", sanch); 
 
   axios.post('https://library-kjji.onrender.com/api/lib/book', formData, {
       headers: {

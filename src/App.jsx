@@ -26,7 +26,9 @@ import Books from './Components/Book';
 import ErdemShinj from './Components/ErdemShinj';
 import SanchZeel from './Components/sanch/SanchZeels';
 import SanchZahialga from './Components/sanch/SanchZahialgas';
-
+import UserZahial from './Components/user/UserZahial';
+import UserZeels from './Components/user/UserZeels';
+import PdfViewer from './Components/PdfViewer';
 function App() {
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
@@ -93,13 +95,26 @@ function App() {
         />
         <FontAwesomeIcon icon={faMagnifyingGlass} className='w-8'/>
         </div>
+      
+        {token ? (
+      <motion.div>
+          <CircleUser className='w-6 sm:w-8 md:w-10 sm:h-6 md:h-8' onClick={() => navigate('userProfile')} />
+        </motion.div>
+        ) : null}
+      </motion.header>
+      <motion.div
+      initial={{ opacity: 0, x: 0 }}
+      animate={{ opacity: 1, x: -30 }}
+      transition={{ duration: 0.6 }}
+      >
+      </motion.div>
       <AnimatePresence>
         {filtered.length > 0 && (
           <motion.ul
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
-            className="absolute z-50 bg-white w-full sm:w-70 md:w-80 right-0 mt-40 border rounded-md shadow-md max-h-60 overflow-y-auto"
+            className="absolute z-50 bg-white w-full sm:w-70 mt-20 md:w-80 right-0 border rounded-md shadow-md max-h-60 overflow-y-auto"
           >
             {filtered.map((book) => (
               <motion.li
@@ -116,18 +131,6 @@ function App() {
           </motion.ul>
         )}
       </AnimatePresence>
-        {token ? (
-      <motion.div>
-          <CircleUser className='w-6 sm:w-8 md:w-10' onClick={() => navigate('userProfile')} />
-        </motion.div>
-        ) : null}
-      </motion.header>
-      <motion.div
-      initial={{ opacity: 0, x: 0 }}
-      animate={{ opacity: 1, x: -30 }}
-      transition={{ duration: 0.6 }}
-      >
-      </motion.div>
         <div>
           <Routes>
             <Route path="/" element={<LibraryHome />}/>
@@ -144,6 +147,9 @@ function App() {
             <Route path='/erdemShinj' element={<ErdemShinj />} />
             <Route path='/zeel' element={<SanchZeel />} />
             <Route path='/zahialga' element={<SanchZahialga />} />
+            <Route path='/userZeel' element={<UserZeels />} />
+            <Route path='/userZahialga' element={<UserZahial />} />
+            <Route path='/pdf' element={<PdfViewer />} />
           </Routes>
         </div>
       </div>

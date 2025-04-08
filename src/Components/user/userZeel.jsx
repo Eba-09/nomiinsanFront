@@ -40,7 +40,7 @@ const UserZeel = ({ user }) => {
   ];
 
   return (
-    <div style={{ height: 263, width: '100%' }}>
+    <div style={{ height: 550, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

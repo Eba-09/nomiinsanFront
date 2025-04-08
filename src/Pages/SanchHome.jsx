@@ -20,18 +20,6 @@ const SanchHome = () => {
       });
   }
 }, [sanch]);
-useEffect(() => {
-  if (sanch) {
-    axios
-      .get(`https://library-kjji.onrender.com/api/lib/sanch/zeel/${sanch}`)
-      .then((res) => {
-        setSanchZeel(res.data.count);
-      })
-      .catch((e) => {
-        console.error(e); 
-      });
-  }
-}, [sanch]);
 return(
 <div>
   <motion.div className="min-h-full w-full border-t-2 rounded-xl border-gray-300  md:w-full sm:w-full bg-white items-center sm:gap-30 md:gap-35 lg:gap-60 gap-3 text-gray-900 p-1 flex justify-end">

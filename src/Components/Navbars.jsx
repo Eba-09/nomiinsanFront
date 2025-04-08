@@ -69,7 +69,6 @@ const Navbar = () => {
           <NavLink to="/" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Нүүр</NavLink>
           <NavLink to="/Book" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Ном</NavLink>
           <NavLink to="/erdemShinj" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Эрдэм шинжилгээ</NavLink>
-          <NavLink to="/sanchLogin" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Дифлом</NavLink>
           {sanchToken ? (
         <NavLink
         to="/sanchHome"

@@ -12,7 +12,9 @@ import { AuthContext } from './AuthContext';
   const { catid } = location.state || {};
   const [books, setbooks] = useState([]);
   const [catName, setCatname] = useState('');
-  const { user } = useContext(AuthContext);
+  const { user, sanch } = useContext(AuthContext);
+    const [bookzeels, setBookZeels] = useState(Number);
+    const [boid, setBoid ] = useState('');
   useEffect(()=>{
     if(catid){
       axios
@@ -38,8 +40,21 @@ import { AuthContext } from './AuthContext';
         })
     }
   },[catid])
-  const Zahialah = (nomCode) => {
+  useEffect(()=>{
+    if(boid){
+      axios
+          .get(`https://library-kjji.onrender.com/api/lib/book/zeel/${boid}`)
+          .then((res)=>{
+            setBookZeels(res.data.count);
+          })
+          .catch((e)=>{
+            console.log(e);
+          })
+    }
+  },[boid])
+  const Zahialah = (nomCode,booktoo) => {
     if(user){
+      if(bookzeels < booktoo){
         axios
              .post('https://library-kjji.onrender.com/api/lib/zahialga', {
                 nomCode: nomCode,
@@ -53,6 +68,11 @@ import { AuthContext } from './AuthContext';
             .catch((e) => {
                 alert("zahialga amjiltgui bolloo")
             })
+      }
+      else{
+        alert("Уг номын үлдэгдэл дууссан байна.");
+      }
+        
     }
     else{
         navigate('/userLogin')
@@ -65,7 +85,7 @@ import { AuthContext } from './AuthContext';
   }
   const renderBooks = () => {
     return books.map((book) => (
-      <div key={book._id} className="min-w-[140px] bg-white rounded-2xl flex flex-col items-center justify-centers hover:shadow-lg transition duration-300 flex-shrink-0">
+      <div key={book._id} className="w-45 bg-white rounded-2xl flex flex-col items-center justify-centers hover:shadow-lg transition duration-300 flex-shrink-0">
         <img onClick={() => OneBook(book._id)}
         src={`https://library-kjji.onrender.com${book.photo}`}
             alt={book.name}
@@ -78,7 +98,10 @@ import { AuthContext } from './AuthContext';
             <p className="text-sm text-center text-gray-800 line-clamp-1">
                 {book.authorId?.AuthorLname || "Unknown Author"}
             </p>
-            <button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm text-center pl-1.5 ml-2.5 pr-1.5 justify-center  w-40" onClick={() => Zahialah(book._id)}>Захиалах</button>
+            { sanch ? null
+                   : (<button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm
+                     text-center pl-1.5 pr-1.5 w-40" onClick={() => Zahialah(book._id, book.too)}>Захиалах</button>)
+                   }
           </div>
       </div>
     ));
@@ -90,7 +113,7 @@ import { AuthContext } from './AuthContext';
         initial={{ opacity: 0, x: -60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className="mt-2 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6"
+        className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
       >
        {renderBooks()}   
       </motion.main>
