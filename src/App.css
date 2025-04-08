@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@theme {
+    --breakpoint-xs: 30rem;
+  }
+.email{
+  display: flex;
+  gap:12px;
+  align-items: center;
+  margin-left: 2px;
+}
+.email input{
+  outline: none;
+}
+.pass{
+  display: flex;
+  gap:12px;
+  align-items: center;
+  margin-left: 3.5px;
+}
+.pass input{
+  outline: none;
+}
