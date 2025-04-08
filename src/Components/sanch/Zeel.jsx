@@ -17,6 +17,7 @@ const Zeel = () => {
         .get(`https://library-kjji.onrender.com/api/lib/zeel`)
         .then((res) => {
           setcount(res.data.count)
+          console.log('ZEEL DATA:', res.data);
           const zahialguud = res.data.data.map((zeel, index) => ({
             id: zeel._id,
             userName: zeel.userCode.Lname,

@@ -71,7 +71,7 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
             whileHover={{ scale: 1.02 }}
             transition={{duration: 0.1}}
               key={book._id}
-              className="min-w-[140px] bg-white rounded-2xl flex flex-col items-center hover:shadow-lg transition duration-300 flex-shrink-0"
+              className="min-w-[120px] w-45 bg-white rounded-2xl flex flex-col items-center hover:shadow-lg transition duration-300 flex-shrink-0"
             >
               <img
               onClick={() => OneBook(book._id)}
@@ -88,7 +88,7 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
                 </p>
                 { sanch ? null
                    : (<button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm
-                     text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25" onClick={() => Zahialah(book._id)}>Захиалах</button>)
+                     text-center pl-1.5 pr-1.5 w-40" onClick={() => Zahialah(book._id)}>Захиалах</button>)
                    }
               </div>
             </motion.div>

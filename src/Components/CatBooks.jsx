@@ -65,7 +65,7 @@ import { AuthContext } from './AuthContext';
   }
   const renderBooks = () => {
     return books.map((book) => (
-      <div key={book._id} className="min-w-[140px] bg-white rounded-2xl flex flex-col items-center hover:shadow-lg transition duration-300 flex-shrink-0">
+      <div key={book._id} className="min-w-[140px] bg-white rounded-2xl flex flex-col items-center justify-centers hover:shadow-lg transition duration-300 flex-shrink-0">
         <img onClick={() => OneBook(book._id)}
         src={`https://library-kjji.onrender.com${book.photo}`}
             alt={book.name}
@@ -78,7 +78,7 @@ import { AuthContext } from './AuthContext';
             <p className="text-sm text-center text-gray-800 line-clamp-1">
                 {book.authorId?.AuthorLname || "Unknown Author"}
             </p>
-            <button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25" onClick={() => Zahialah(book._id)}>Захиалах</button>
+            <button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm text-center pl-1.5 ml-2.5 pr-1.5 justify-center  w-40" onClick={() => Zahialah(book._id)}>Захиалах</button>
           </div>
       </div>
     ));
