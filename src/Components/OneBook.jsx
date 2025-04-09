@@ -5,8 +5,10 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 function OneBook () {
     const location = useLocation();
+    const navigate = useNavigate();
     const [bookdata, setbookdata] = useState([]);
     const { bookid } = location.state || {};
     const {user, sanch} = useContext(AuthContext);
