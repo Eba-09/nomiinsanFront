@@ -23,8 +23,8 @@ const UserReg = () => {
       .then(result =>{ 
         console.log(result)
         if(result.data.success){
-            alert("Амжиллтай нэвтэрлээ");
-            navigate('/userHome');
+            alert("Бүртгүүллээ");
+            navigate('/userLogin');
         }
         else{
             alert("Бүртгүүлэх хүсэлт амжилтгүй боллоо.");
