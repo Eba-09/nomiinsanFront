@@ -50,15 +50,15 @@ const UserLogin = () => {
         <input placeholder="Нууц үг" type="password" className='focus:outline-0' onChange={(e) => setPassword(e.target.value)} />
       </div>
       <div className="flex items-center justify-center p-0.5">
-        <button title="Нэвтрэх"  className='bg-green-300 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 md:w-50 sm:w-40 w-32 ' >Нэвтрэх</button>
+        <button title="Нэвтрэх"  className='bg-blue-400 hover:bg-blue-500 rounded-2xl text-center pl-1.5 pr-1.5 md:w-50 sm:w-40 w-32 ' >Нэвтрэх</button>
         </div>
         </form>
         <div className='flex flex-col items-center justify-center gap-1'>
         <div className="flex items-center justify-center p-0.5">
-        <button className='bg-green-300 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 w-32 md:w-50 sm:w-40' onClick={() => navigate('/userReg')}>Бүртгүүлэх</button>
+        <button className='bg-blue-400 hover:bg-blue-500 rounded-2xl text-center pl-1.5 pr-1.5 w-32 md:w-50 sm:w-40' onClick={() => navigate('/userReg')}>Бүртгүүлэх</button>
         </div>
         <div className="flex items-center justify-center p-0.5">
-        <button className='bg-green-300 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 w-32 md:w-50 sm:w-40' onClick={() => navigate('/sanchLogin')}>Номын санчаар нэвтрэх</button>
+        <button className='bg-blue-400 hover:bg-blue-500 rounded-2xl text-center pl-1.5 pr-1.5 w-32 md:w-50 sm:w-40' onClick={() => navigate('/sanchLogin')}>Номын санчаар нэвтрэх</button>
         </div>
         </div>
         

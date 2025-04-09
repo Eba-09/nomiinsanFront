@@ -6,16 +6,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
-  function Books() {
+  function ErdemShinj() {
     const navigate = useNavigate();
   const [books, setbooks] = useState([]);
   const [catName, setCatname] = useState('');
   const { user, sanch } = useContext(AuthContext);
+  const [boid, setBoid] = useState('');
   const [bookzeels, setBookZeels] = useState(Number);
-  const [boid, setBoid ] = useState('');
   useEffect(()=>{
       axios
-          .get(`https://library-kjji.onrender.com/api/lib/category/67f1290aec2de1c6e7523aa9`)
+          .get(`https://library-kjji.onrender.com/api/lib/category/67f1298bec2de1c6e7523aac`)
           .then((res)=>{
             setCatname(res.data.data.name)
           })
@@ -23,18 +23,6 @@ import { AuthContext } from './AuthContext';
             console.log(e);
           })
   },[])
-  useEffect(() => {
-    if(catName){
-    axios
-        .get(`https://library-kjji.onrender.com/api/lib/category/book/67f1290aec2de1c6e7523aa9`)
-        .then((res) =>{
-            setbooks(res.data.data);
-        })
-        .catch((e) => {
-            console.log(e)
-        })
-    }
-  },[catName])
   useEffect(()=>{
     if(boid){
       axios
@@ -47,7 +35,19 @@ import { AuthContext } from './AuthContext';
           })
     }
   },[boid])
-  const Zahialah = (nomCode, booktoo) => {
+  useEffect(() => {
+    if(catName){
+    axios
+        .get(`https://library-kjji.onrender.com/api/lib/category/book/67f1298bec2de1c6e7523aac`)
+        .then((res) =>{
+            setbooks(res.data.data);
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+    }
+  },[catName])
+  const Zahialah = (nomCode,booktoo) => {
     setBoid(nomCode);
     if(user){
       if(bookzeels < booktoo){
@@ -65,21 +65,16 @@ import { AuthContext } from './AuthContext';
                 alert("zahialga amjiltgui bolloo")
             })
       }
-      else {
-        alert("Уг номын үлдэгдэл дууссан байна.")
-      }
     }
     else{
         navigate('/userLogin')
     }
   }
-  
   const OneBook = (bookid) =>{
     if(bookid){
       navigate('/oneBook', {state: {bookid : bookid}})
     }
   }
- 
   const renderBooks = () => {
     return books.map((book) => (
       <div key={book._id} className="w-45 bg-gray-100 rounded-2xl flex flex-col items-center hover:shadow-lg transition duration-300 flex-shrink-0">
@@ -117,4 +112,4 @@ import { AuthContext } from './AuthContext';
     </div>
   );
 }
-export default Books
+export default ErdemShinj

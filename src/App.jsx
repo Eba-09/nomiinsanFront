@@ -29,6 +29,7 @@ import SanchZahialga from './Components/sanch/SanchZahialgas';
 import UserZahial from './Components/user/UserZahial';
 import UserZeels from './Components/user/UserZeels';
 import PdfViewer from './Components/PdfViewer';
+import Diplom from './Components/Diplom'
 function App() {
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
@@ -191,6 +192,7 @@ function App() {
             <Route path='/userZeel' element={<UserZeels />} />
             <Route path='/userZahialga' element={<UserZahial />} />
             <Route path='/pdf' element={<PdfViewer />} />
+            <Route path='/diplom' element={<Diplom />} />
           </Routes>
         </div>
       </div>

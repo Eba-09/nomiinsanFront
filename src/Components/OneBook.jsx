@@ -11,12 +11,14 @@ function OneBook () {
     const { bookid } = location.state || {};
     const {user, sanch} = useContext(AuthContext);
     const [bookzeels, setBookZeels] = useState(0);
+    const [catid, setcatid ] = useState('');
     useEffect(()=>{
         if(bookid){
             axios
                 .get(`https://library-kjji.onrender.com/api/lib/book/${bookid}`)
                 .then((res)=>{
                     setbookdata(res.data.data)
+                    
                 })
                 .catch((e)=>{
                     console.log(e);
@@ -90,8 +92,13 @@ function OneBook () {
             </div>
             <div className="w-full md:w-1/2 max-w-2xl font-sans bg-white p-6 rounded-3xl shadow-xl flex flex-col gap-4">
               <h1 className="text-xl lg:text-3xl  font-extrabold text-center text-gray-800">{bookdata.name}</h1>
-              <p className="text-lg text-gray-600">Зохиолч: <span className="font-semibold">{bookdata.authorId?.AuthorFname + " " + bookdata.authorId?.AuthorLname  || "Тодорхойгүй"}</span></p>
-      
+              <span>{bookdata.authorId?.AuthorFname + ' ' + bookdata.authorId?.AuthorLname}</span>
+              {bookdata.category === "67f1298bec2de1c6e7523aac" ? (
+                <a href='https://drive.google.com/drive/folders/111YtQfChFgkaYjDO-Sq26lbTjBzNlqEi?usp=sharing' className='no-underline'>PDF файлаар үзэх</a> 
+                  ) : null}
+              {bookdata._id === "67f4efc2e7f35922eaaa5593" ? (
+                <a href='https://drive.google.com/file/d/1j8X6d6G8mhqtuGl1ATLHl-YsFzTKhlWW/view?usp=sharing' className='no-underline'>PDF файлаар үзэх</a> 
+                  ) : null}
               <div className="grid grid-cols-2 place-content-center gap-4 text-gray-700 text-base">
                 {sanch ? (<div><h6>Үнэ:</h6> <span className="text-red-500">{bookdata.price}₮</span></div>): null}
                 <div><h6>Хэл:</h6> {bookdata.hel}</div>
@@ -105,11 +112,11 @@ function OneBook () {
                 {"★".repeat(bookdata.rating)}{"☆".repeat(5 - bookdata.rating)}
                 <span className="text-gray-600 text-center sm:text-2xl text-base">({bookdata.rating})</span>
               </div>
-              { sanch ? (<button className="bmt-4 bg-red-400 hover:bg-red-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"
-                  onClick={() => BookDelete(bookdata._id)}>Устгах</button>)
+              { sanch ? (<button className="bmt-4 bg-blue-400 hover:bg-blue-500 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"
+                  onClick={() => BookDelete(bookdata._id)}>Засварлах</button>)
                    : (<button
                     onClick={() => Zahialah(bookdata._id)}
-                    className="mt-4 bg-green-500 hover:bg-green-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"
+                    className="mt-4 bg-blue-400 hover:bg-blue-500 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"
                   >
                     Захиалах
                   </button>)

@@ -69,7 +69,7 @@ return (
             <input placeholder="Нууц үг" className='focus:outline-0' type="password" onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className='flex items-center justify-center p-0.5'>
-            <button title="Бүртгүүлэх" className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-fit' onClick={() => UserSubmit()}>Бүртгүүлэх</button>
+            <button title="Бүртгүүлэх" className='bg-blue-400 hover:bg-blue-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-fit' onClick={() => UserSubmit()}>Бүртгүүлэх</button>
         </div>
         </form>
        

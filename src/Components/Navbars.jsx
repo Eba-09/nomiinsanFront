@@ -24,6 +24,7 @@ function Navbar  () {
           <NavLink to="/" className={({ isActive }) => isActive ? "text-blue-500 font-bold lg:border-b-1 rounded-2xl md:shadow-none  pl-1 pr-1  transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Нүүр</NavLink>
           <NavLink to="/Book" className={({ isActive }) => isActive ? "text-blue-500 font-bold lg:border-b-1 md:shadow-none  rounded-2xl pl-1 pr-1  transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Ном</NavLink>
           <NavLink to="/erdemShinj" className={({ isActive }) => isActive ? "text-blue-500 font-bold lg:border-b-1 md:shadow-none  rounded-2xl pl-1 pr-1  transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Эрдэм шинжилгээ</NavLink>
+          <NavLink to="/diplom" className={({ isActive }) => isActive ? "text-blue-500 font-bold lg:border-b-1 md:shadow-none  rounded-2xl pl-1 pr-1  transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Дифлом</NavLink>
           {sanchToken ? (
         <NavLink
         to="/sanchHome"
@@ -69,6 +70,7 @@ function Navbar  () {
           <NavLink to="/" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Нүүр</NavLink>
           <NavLink to="/Book" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Ном</NavLink>
           <NavLink to="/erdemShinj" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Эрдэм шинжилгээ</NavLink>
+          <NavLink to="/diplom" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Дифлом</NavLink>
           {sanchToken ? (
         <NavLink
         to="/sanchHome"

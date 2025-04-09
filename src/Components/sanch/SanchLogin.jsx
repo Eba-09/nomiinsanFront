@@ -51,11 +51,11 @@ const Login = () => {
         <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
       </div>
       <div className='flex items-center justify-center p-0.5'>
-        <button title="Нэвтрэх" className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-full'>Нэвтрэх</button>
+        <button title="Нэвтрэх" className='bg-blue-400 hover:bg-blue-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-full'>Нэвтрэх</button>
         </div>
         </form>
         <div className='flex items-center justify-center p-0.5'>
-        <button className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-full' onClick={() => navigate('/userLogin')}>Хэрэглэгчээр нэвтрэх</button>
+        <button className='bg-blue-400 hover:bg-blue-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-full' onClick={() => navigate('/userLogin')}>Хэрэглэгчээр нэвтрэх</button>
         </div>
     </div>
     </motion.div>

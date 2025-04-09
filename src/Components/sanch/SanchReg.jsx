@@ -57,7 +57,7 @@ const SanchReg = () => {
           <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className='flex items-center justify-center p-0.5'>
-          <button title="Бүртгүүлэх" className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-full' >Бүртгүүлэх</button>
+          <button title="Бүртгүүлэх" className='bg-blue-400 hover:bg-blue-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-full' >Бүртгүүлэх</button>
         </div>
         </form>
     </div>

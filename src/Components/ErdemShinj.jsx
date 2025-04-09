@@ -65,7 +65,6 @@ import { AuthContext } from './AuthContext';
                 alert("zahialga amjiltgui bolloo")
             })
       }
-        
     }
     else{
         navigate('/userLogin')
@@ -92,7 +91,7 @@ import { AuthContext } from './AuthContext';
                 {book.authorId?.AuthorLname || "Unknown Author"}
             </p>
             { sanch ? null
-                   : (<button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm
+                   : (<button className="bg-blue-400 hover:bg-blue-500 rounded-2xl text-sm
                      text-center pl-1.5 pr-1.5 w-40" onClick={() => Zahialah(book._id, book.too)}>Захиалах</button>)
                    }
           </div>

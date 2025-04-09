@@ -4,7 +4,7 @@ import React,{useState, useEffect} from "react"
 import axios from 'axios';
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
-import ConImage from '../images/girl-5757532_640.jpg'
+import ConImage from '../images/me.jpg'
 const SanchHome = () => {
   const {sanch} = useContext(AuthContext);
   const [sanchData, setsanchData] = useState([]);
@@ -57,12 +57,12 @@ return(
   className='grid grid-cols-1 sm:justify-center gap-3 md:grid-cols-2 sm:mt-10 md:mt-20 justify-center'>
     <div className='flex flex-col justify-center items-center'>
     <span className='sm:text-2xl lg:w-160 sm:font-extrabold flex flex-col md:justify-center items-center font-mono w-120 '><b className=' text-xl sm:text-3xl lg:text-6xl text-center'>'Мэдээлэл зүйн тэнхимийн'</b> <span className='text-md lg:text-4xl text-center w-fit'>номын санд тавтай морилно уу.</span></span>
-    <NavLink to='/' className='mt-4 bg-green-500 hover:bg-green-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition' onClick={() => navigate('/')}>Get start</NavLink>
+    <NavLink to='/' className='mt-4 bg-blue-400 hover:bg-blue-500 text-white py-3 px-6 text-lg rounded-xl font-semibold transition' onClick={() => navigate('/')}>Эхлэх</NavLink>
     </div>
  <motion.div 
  whileHover={{scale: 1.01}}
  className=" shadow-2xl w-70 sm:block sm:w-130 ml-15 md:w-70 lg:w-120 rounded-2xl bg-center">
-   <img src={ConImage} alt='My img'  className='rounded-2xl  flex items-center h-70 sm:h-85 lg:w-120 sm:w-130 md:w-70'/>
+   <img src={ConImage} alt='My img'  className='rounded-2xl  flex items-center h-70 sm:h-85 lg:h-90 lg:w-120 sm:w-130 md:w-70'/>
  </motion.div>
  </motion.div>
   </div>
