@@ -82,7 +82,7 @@ import { AuthContext } from './AuthContext';
  
   const renderBooks = () => {
     return books.map((book) => (
-      <div key={book._id} className="w-45 bg-white rounded-2xl flex flex-col items-center hover:shadow-lg transition duration-300 flex-shrink-0">
+      <div key={book._id} className="w-45 bg-gray-100 rounded-2xl flex flex-col items-center hover:shadow-lg transition duration-300 flex-shrink-0">
         <img onClick={() => OneBook(book._id)}
         src={`https://library-kjji.onrender.com${book.photo}`}
             alt={book.name}
@@ -104,7 +104,7 @@ import { AuthContext } from './AuthContext';
     ));
   };
   return (
-    <div className="min-h-full bg-gray-100 font-sans text-gray-900 p-4">
+    <div className="min-h-full  font-sans text-gray-900 p-4">
       <p className='text-center font-bold text-gray-800 font-sans'>{catName}</p>
       <motion.main
         initial={{ opacity: 0, x: -60 }}
