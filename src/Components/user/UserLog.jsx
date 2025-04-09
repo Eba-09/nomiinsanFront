@@ -21,19 +21,19 @@ const UserLogin = () => {
           if (result.data.success) {
             alert("Амжилттай нэвтэрлээ");
             login(result.data.token);
-            navigate('/');
+            navigate('/userProfile');
           }
           else{
             alert("Нэвтрэх нэр эсвэл нууц үгээ зөв оруулна уу.")
           }
         })
         .catch(err => {
-          alert("Нэвтрэх нэр эсвэл нууц үгээ зөв оруулна уу.")
+          console.log(err)
         })
     };
   return (
     <motion.div 
-    initial={{opacity: 0, x: -60}}
+    initial={{opacity: 0.5, x: -60}}
     animate={{opacity: 1, x: 0}}
     transition={{duration: 0.6}}
     className='w-full  h-[calc(100vh-48px)] flex flex-col bg-cover justify-center items-center font-sans'

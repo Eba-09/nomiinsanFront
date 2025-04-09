@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 
-const UserZahialga = ({ user }) => {
+function UserZahialga  ({ user }) {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {

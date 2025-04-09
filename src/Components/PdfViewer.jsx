@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-export default function PdfViewer() {
+ function PdfViewer() {
   const [pdfFiles, setPdfFiles] = useState([]);
-
   useEffect(() => {
     fetch('https://library-kjji.onrender.com/api/lib/pdf')
       .then(response => response.json())
@@ -36,3 +35,4 @@ export default function PdfViewer() {
     </div>
   );
 }
+export default PdfViewer

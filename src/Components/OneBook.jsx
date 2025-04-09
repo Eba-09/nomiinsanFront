@@ -5,7 +5,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
-const OneBook = () => {
+function OneBook () {
     const location = useLocation();
     const [bookdata, setbookdata] = useState([]);
     const { bookid } = location.state || {};
@@ -97,7 +97,7 @@ const OneBook = () => {
                 <div><h6>Хэл:</h6> {bookdata.hel}</div>
                 <div><h6>ISBN:</h6> {bookdata.isbn}</div>
                 <div><h6>Хуудас:</h6> {bookdata.huudas}</div>
-                <div><h6>Нөөц:</h6> {bookdata.too-bookzeels}ш</div>
+                <div><h6>Үлдэгдэл:</h6> {bookdata.too-bookzeels}ш</div>
                 {sanch ? (<div><h6>Нийт тоо:</h6>{bookdata.too}ш</div>):null}
                 <div><h6>Байршил:</h6> {bookdata.bairshil}</div>
               </div>
@@ -106,7 +106,7 @@ const OneBook = () => {
                 <span className="text-gray-600 text-center sm:text-2xl text-base">({bookdata.rating})</span>
               </div>
               { sanch ? (<button className="bmt-4 bg-red-400 hover:bg-red-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"
-                  onClick={() => BookDelete(book._id)}>Устгах</button>)
+                  onClick={() => BookDelete(bookdata._id)}>Устгах</button>)
                    : (<button
                     onClick={() => Zahialah(bookdata._id)}
                     className="mt-4 bg-green-500 hover:bg-green-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"

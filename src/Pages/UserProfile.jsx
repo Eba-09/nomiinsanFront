@@ -7,8 +7,7 @@ import { AuthContext } from '../Components/AuthContext';
 import { NavLink } from "react-router-dom";
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
-import UserZahialga from "../Components/user/userZahialga";
-import UserZeel from "../Components/user/userZeel";
+import ConImage from '../images/girl-5757532_640.jpg'
 function getUserInfo () {
 const [userData, setuserData] = useState([]);
  const [zahtoo, setzahtoo] = useState(null);
@@ -81,6 +80,21 @@ const [userData, setuserData] = useState([]);
         </div>
       </div>
       </motion.div>
+      <motion.div
+        initial={{opacity: 0.4, x:-30}}
+        animate={{opacity: 1, x: 0}}
+        transition={{duration: 0.6}}
+        className='grid grid-cols-1 sm:justify-center gap-3 md:grid-cols-2 sm:mt-10 md:mt-20 justify-center'>
+          <div className='flex flex-col justify-center items-center'>
+          <span className='sm:text-2xl lg:w-160 sm:font-extrabold flex flex-col md:justify-center items-center font-mono w-120 '><b className=' text-xl sm:text-3xl lg:text-6xl text-center'>'Мэдээлэл зүйн тэнхимийн'</b> <span className='text-md lg:text-4xl text-center w-fit'>номын санд тавтай морилно уу.</span></span>
+          <NavLink to='/' className='mt-4 bg-green-500 hover:bg-green-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition' onClick={() => navigate('/')}>Get start</NavLink>
+          </div>
+       <motion.div 
+       whileHover={{scale: 1.01}}
+       className=" shadow-2xl w-70 sm:block sm:w-130 ml-15 md:w-70 lg:w-120 rounded-2xl bg-center">
+         <img src={ConImage} alt='My img'  className='rounded-2xl  flex items-center h-70 sm:h-85 lg:w-120 sm:w-130 md:w-70'/>
+       </motion.div>
+       </motion.div>
       </div>
   )
 };

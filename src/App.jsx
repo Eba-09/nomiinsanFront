@@ -35,13 +35,21 @@ function App() {
   const [search, setSearch] = useState('');
   const [books, setBooks] = useState([]);
   const [filtered, setFiltered] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [showCategory, setShowCategory] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   useEffect(() => {
-    axios.get('https://library-kjji.onrender.com/api/lib/book') // Энд API замаа тохируул
-      .then((res) => setBooks(res.data.data))
+    if(selectedCategory){
+      axios.get(`https://library-kjji.onrender.com/api/lib/category/book/${selectedCategory}`)
+      .then((res) => {setBooks(res.data.data)
+        console.log(res.data.data)
+      })
       .catch((err) => console.error('Ном татахад алдаа:', err));
-  }, []);
+    }
+  }, [selectedCategory]);
   useEffect(() => {
     if (search.trim() === '') {
+      console.log(search);
       setFiltered([]);
     } else {
       const result = books.filter((book) =>
@@ -64,13 +72,29 @@ function App() {
       )
     );
   };
+  const handleFocus = async () => {
+    try {
+      const res = await axios.get('https://library-kjji.onrender.com/api/lib/category');
+      setCategories(res.data.data);
+      setShowCategory(true);
+    } catch (err) {
+      console.error("Категори татаж чадсангүй:", err);
+    }
+  };
+  const handleCategoryChange = (categoryId) => {
+    onCategorySelect(categoryId);
+  };
+  const onCategorySelect = (categoryId) => {
+    setSelectedCategory(categoryId);
+    console.log("Сонгосон категори:", categoryId);
+  };
   const SelectBook = (bookid) => {
     if(bookid){
       navigate('/oneBook', {state: {bookid : bookid}})
     }
   }
   return (
-      <div className="flex flex-col min-h-screen bg-gray-100 text-gray-900">
+      <div className="flex flex-col w-full min-h-screen  text-gray-900">
       {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -30 }}
@@ -90,12 +114,13 @@ function App() {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onFocus={handleFocus}
+          onBlur={() => setTimeout(() => setShowCategory(false), 200)}          
           placeholder="Ном хайх..."
           className=" outline-0 lg:focus:w-38 focus:w-25 focus:bg-gray-200 rounded-sm sm:focus:w-30 md:w-35 md:focus:40 w-full xs:w-20"
         />
         <FontAwesomeIcon icon={faMagnifyingGlass} className='w-8'/>
         </div>
-      
         {token ? (
       <motion.div>
           <CircleUser className='w-6 sm:w-8 md:w-10 sm:h-6 md:h-8' onClick={() => navigate('userProfile')} />
@@ -108,13 +133,29 @@ function App() {
       transition={{ duration: 0.6 }}
       >
       </motion.div>
+      {showCategory && (
+        <div className="absolute top-11 left-0 w-full bg-white border shadow-md mt-1 rounded z-10 max-h-60 overflow-auto">
+          {categories.map((cat) => (
+            <label
+              key={cat._id}
+              className="flex items-center space-x-2 px-3 py-1 hover:bg-gray-100"
+            >
+              <input
+                type="checkbox"
+                onChange={() => handleCategoryChange(cat._id)}
+              />
+              <span>{cat.name}</span>
+            </label>
+          ))}
+        </div>
+      )}
       <AnimatePresence>
-        {filtered.length > 0 && (
+        {filtered?.length > 0 && (
           <motion.ul
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
-            className="absolute z-50 bg-white w-full sm:w-70 mt-20 md:w-80 right-0 border rounded-md shadow-md max-h-60 overflow-y-auto"
+            className="absolute z-50 bg-white w-full sm:w-70 mt-12 md:w-80 right-0 border rounded-md shadow-md max-h-60 overflow-y-auto"
           >
             {filtered.map((book) => (
               <motion.li

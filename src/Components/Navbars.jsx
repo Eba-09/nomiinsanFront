@@ -5,7 +5,7 @@ import { faXmark, faBars } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
-const Navbar = () => {
+function Navbar  () {
   const [isOpen, setIsOpen] = useState(false);
   const { token, logout, sanchToken, sanchlogout} = useContext(AuthContext);
   const navigate = useNavigate();

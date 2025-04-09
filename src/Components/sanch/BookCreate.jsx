@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
-const BookCreate = () => {
+function BookCreate  () {
     const {sanch } = useContext(AuthContext);
     const [name, setName] = useState('');
     const [photo, setPhoto] = useState(null);
