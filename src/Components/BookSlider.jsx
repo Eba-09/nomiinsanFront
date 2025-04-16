@@ -94,9 +94,9 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
             >
               <img
               onClick={() => OneBook(book._id)}
-                src={`https://library-kjji.onrender.com${book.photo}`}
+                src={`${book.photo}`}
                 alt={book.name}
-                className="w-30 h-40 object-cover bg-cover rounded-t-2xl"
+                className="w-30 h-40 bg-center object-center  rounded-t-2xl"
               />
               <div className="p-2">
                 <h3 className="text-sm text-center font-semibold text-gray-800 line-clamp-1">

@@ -85,11 +85,11 @@ function OneBook () {
   whileHover={{ scale: 1.02 }}
   src={
     bookdata.photo
-      ? `https://library-kjji.onrender.com${bookdata.photo}`
+      ? `${bookdata.photo}`
       : "/placeholder.jpg" // Зураг байхгүй үед харагдах default зураг
   }
   alt={bookdata.name}
-  className="w-[300px] h-[420px] md:h-[500px] md:w-[330px] lg:w-[365px] object-cover hover:shadow-2xl rounded-2xl shadow-lg"
+  className="w-[300px] h-[420px] md:h-[500px] md:w-[330px] lg:w-[365px] bg-center object-center hover:shadow-2xl rounded-2xl shadow-lg"
 />
             </div>
             <div className="w-full md:w-1/2 max-w-2xl font-sans bg-white p-6 rounded-3xl shadow-xl flex flex-col gap-4">

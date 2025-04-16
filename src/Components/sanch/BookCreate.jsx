@@ -31,6 +31,7 @@ function BookCreate  () {
     const [AuthorFname,setAuthorFname ] = useState('');
     const [AuthorLname,setAuthorLname ] = useState('');
     const [AuthorPhone,setAuthorPhone ] = useState('');
+    const [imageUrl, setImageUrl] = useState("");
     useEffect(() => {
         axios.get('https://library-kjji.onrender.com/api/lib/author')
             .then(response => setAuthors(response.data.data))
@@ -79,6 +80,10 @@ const uploadImageToCloudinary = async (file) => {
       `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`,
       formData
     );
+    setImageUrl(response.data.secure_url);
+    console.log("Cloudinary upload result:", response.data);
+console.log("Image URL:", response.data.secure_url);
+
     return response.data.secure_url; // Cloudinary image URL
   };
   
@@ -97,7 +102,7 @@ const handleSubmit = async (e) => {
   
       const formData = {
         name,
-        photo: imageUrl, // Cloudinary-с ирсэн зурган зам
+        photo: imageUrl,
         authorId,
         isbn,
         rating,
@@ -114,7 +119,6 @@ const handleSubmit = async (e) => {
   
       const response = await axios.post('https://library-kjji.onrender.com/api/lib/book', formData);
       alert("Ном амжилттай үүслээ!");
-  
       // Reset
       setName('');
       setPhoto(null);
