@@ -42,9 +42,9 @@ function BookCreate  () {
             .catch(error => console.log(error));
     }, []);
     const handleFileChange = (e) => {
-      const file = e.target.files[0]; // Эхний файлыг авна
+      const file = e.target.files[0]; 
       if (file) {
-          setPhoto(file); // Фото-г хадгална
+          setPhoto(file); 
       }
   };
   const authorCreate = (e) => {
@@ -70,43 +70,54 @@ function BookCreate  () {
         alert("Зохиолчийн овог, нэрийг оруулна уу.");
     }
 };
-const handleSubmit = (e) => {
-  e.preventDefault();
-
-  if (!sanch) {
+const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
+    formData.append("cloud_name", import.meta.env.VITE_CLOUD_NAME);
+    const response = await axios.post(
+      `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`,
+      formData
+    );
+    return response.data.secure_url; // Cloudinary image URL
+  };
+  
+const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!sanch) {
       alert("Нэвтэрсэн хэрэглэгчийн мэдээлэл байхгүй байна!");
       return;
-  }
-
-  setCreateUser(sanch); // createUser-д хэрэглэгч онооно
-
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("photo", photo); // File input-с ирсэн зураг
-  formData.append("authorId", authorId);
-  formData.append("isbn", isbn);
-  formData.append("rating", rating);
-  formData.append("price", price);
-  formData.append("hel", hel);
-  formData.append("hewlesenOgnoo", hewlesenOgnoo);
-  formData.append("too", too);
-  formData.append("huudas", huudas);
-  formData.append("available", available);
-  formData.append("bairshil", bairshil);
-  formData.append("category", category);
-  formData.append("createUser", sanch); 
-
-  axios.post('https://library-kjji.onrender.com/api/lib/book', formData, {
-      headers: {
-          'Content-Type': 'multipart/form-data',
-      },
-  })
-  .then((response) => {
-      console.log("Success:", response.data);
+    }
+    try {
+      let imageUrl = '';
+      if (photo) {
+        imageUrl = await uploadImageToCloudinary(photo);
+      }
+  
+      const formData = {
+        name,
+        photo: imageUrl, // Cloudinary-с ирсэн зурган зам
+        authorId,
+        isbn,
+        rating,
+        price,
+        hel,
+        hewlesenOgnoo,
+        too,
+        huudas,
+        available,
+        category,
+        bairshil,
+        createUser: sanch,
+      };
+  
+      const response = await axios.post('https://library-kjji.onrender.com/api/lib/book', formData);
       alert("Ном амжилттай үүслээ!");
-      // Form reset
+  
+      // Reset
       setName('');
-      setPhoto(null); // file input
+      setPhoto(null);
       setAuthorId('');
       setIsbn('');
       setRating('');
@@ -118,13 +129,11 @@ const handleSubmit = (e) => {
       setAvailable('');
       setCategory('');
       setBairshil('');
-  })
-  .catch((error) => {
+    } catch (error) {
       console.error("Error:", error);
       alert("Ном үүсгэх үед алдаа гарлаа");
-  });
-};
-
+    }
+  };
      
     return (
         <div>
