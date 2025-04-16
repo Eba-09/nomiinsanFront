@@ -6,4 +6,8 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss(),
   ],
+  build: {
+    chunkSizeWarningLimit: 1500, // 1500kb хүртэл зөвшөөрнө
+  },
 })
+
